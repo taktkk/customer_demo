@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 //ライブラリのインポート
+import { Phone } from "@element-plus/icons-vue";
 import {
   CognitoUserPool,
   CognitoUser,
   AuthenticationDetails,
+  CognitoUserAttribute,
 } from "amazon-cognito-identity-js";
 
 // import Header from '../components/Header.vue'
@@ -14,11 +16,11 @@ const useremail = ref("");
 const password = ref("");
 const username = ref("");
 const username_kana = ref("");
-const prefacture = ref("");
+const prefecture = ref("");
 const phonenumber = ref("");
 const birthday = ref("");
 
-const login = () => {
+const signup = () => {
   //cognito設定
   const poolData = {
     UserPoolId: import.meta.env.VITE_APP_POOL_ID,
@@ -26,43 +28,44 @@ const login = () => {
   };
   const userPool = new CognitoUserPool(poolData);
 
-  //cognitoパラメータ設定
-  // const useremail = useremail.value;
-  // const password = password.value;
+  // const name = { Name: 'name', Value: username.value }
+  const email = { Name: "email", Value: useremail.value };
+  // const Password = { Name: 'password', Value: password.value }
+  const Username_kana = { Name: "kana_name", Value: username_kana.value };
+  const Prefecture = { Name: "address", Value: prefecture.value };
+  const Phonenumber = { Name: "phone_number", Value: phonenumber.value };
+  const Birthday = { Name: "birthdate", Value: birthday.value };
 
-  const authenticationData = {
-    Username: useremail.value,
-    Password: password.value,
-  };
+  const attributeList = [];
+  // attributeList.push(new CognitoUserAttribute(name))
+  attributeList.push(new CognitoUserAttribute(email));
+  // attributeList.push(new CognitoUserAttribute(Password))
+  attributeList.push(new CognitoUserAttribute(Username_kana));
+  attributeList.push(new CognitoUserAttribute(Prefecture));
+  attributeList.push(new CognitoUserAttribute(Phonenumber));
+  attributeList.push(new CognitoUserAttribute(Birthday));
 
-  const authenticationDetails = new AuthenticationDetails(authenticationData);
-
-  const userData = {
-    Username: useremail.value,
-    Pool: userPool,
-  };
-
-  const cognitoUser = new CognitoUser(userData);
-
-  //ログイン処理
-  cognitoUser.authenticateUser(authenticationDetails, {
-    newPasswordRequired: function (userAttributes, requiredAttributes) {
-      cognitoUser.completeNewPasswordChallenge("Admin@Admin00", {}, this);
-    },
-
-    onSuccess: function () {
-      const result = "/mypage_admin";
-      location.assign(result);
-    },
-    onFailure: function (err) {
-      alert(err.message || JSON.stringify(err));
-    },
+  return new Promise((resolve, reject) => {
+    userPool.signUp(
+      username.value,
+      password.value,
+      attributeList,
+      null,
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+          // location.assign("/signin");
+        }
+      }
+    );
   });
 };
 </script>
 
 <template>
-  <div class="login">
+  <div class="signup">
     <h3>ユーザー情報</h3>
     <el-form>
       <div class="demo-input-size">
@@ -90,7 +93,7 @@ const login = () => {
           placeholder="氏名"
         />
         <el-input
-          type="password"
+          type="string"
           class="email-form w-50 m-2"
           required
           v-model="username_kana"
@@ -99,14 +102,14 @@ const login = () => {
       </div>
       <div class="demo-input-size">
         <el-input
-          type="email"
+          type="string"
           class="email-form w-50 m-2"
           required
-          v-model="prefacture"
+          v-model="prefecture"
           placeholder="都道府県"
         />
         <el-input
-          type="password"
+          type="string"
           class="email-form w-60 m-2"
           required
           v-model="phonenumber"
@@ -115,14 +118,14 @@ const login = () => {
       </div>
       <div class="demo-input-size">
         <el-input
-          type="email"
+          type="string"
           class="email-form w-50 m-2"
           required
           v-model="birthday"
           placeholder="生年月日"
         />
       </div>
-      <el-button @click.prevent="login" color="#B9A273" class="login-button"
+      <el-button @click.prevent="signup" color="#B9A273" class="login-button"
         >新規登録</el-button
       >
     </el-form>
@@ -130,7 +133,7 @@ const login = () => {
 </template>
 
 <style scoped>
-.login {
+.signup {
   margin: 0 auto;
   position: absolute;
   width: 812px;
