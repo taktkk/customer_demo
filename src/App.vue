@@ -1,83 +1,102 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
+import { ArrowDown } from "@element-plus/icons-vue";
 </script>
 
 <template>
-  <header>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
-      <RouterLink to="/signin">Signin</RouterLink>
-      <RouterLink to="/signup">Signup</RouterLink>
-      <RouterLink to="/passwordreset">Password Reset</RouterLink>
-      <RouterLink to="/passwordedit">Password Edit</RouterLink>
-    </nav>
-  </header>
+  <div class="common-layout">
+    <el-container>
+      <el-header class="header"
+        ><span class="header-text">Varma Web アプリ</span>
+        <div>
+          <el-dropdown class="nav-link">
+            <span class="el-dropdown-link">
+              Varma
+              <el-icon class="el-icon--right">
+                <arrow-down />
+              </el-icon>
+            </span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item
+                  ><RouterLink to="/">Home</RouterLink></el-dropdown-item
+                >
+                <el-dropdown-item
+                  ><RouterLink to="/about">About</RouterLink></el-dropdown-item
+                >
+                <el-dropdown-item
+                  ><RouterLink to="/signin"
+                    >SignIn</RouterLink
+                  ></el-dropdown-item
+                >
+                <el-dropdown-item
+                  ><RouterLink to="/signup"
+                    >Signup</RouterLink
+                  ></el-dropdown-item
+                >
+                <el-dropdown-item
+                  ><RouterLink to="/passwordreset"
+                    >Password Reset</RouterLink
+                  ></el-dropdown-item
+                >
+                <el-dropdown-item
+                  ><RouterLink to="/passwordedit"
+                    >Password Edit</RouterLink
+                  ></el-dropdown-item
+                >
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </div>
+      </el-header>
+    </el-container>
+  </div>
+
+  <div class="common-layout">
+    <el-container>
+      <el-footer class="footer"
+        >Copyright © 2022Varma Inc. All Rights Reserved.</el-footer
+      >
+    </el-container>
+  </div>
 
   <RouterView />
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.header {
+  height: 72px;
+  background-color: #b9a273;
+  font-family: Arial;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.15000000596046448px;
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.15px;
+}
+.header-text {
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 24px;
+  color: #ffffff;
+  text-align: left;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.nav-link {
+  text-align: right;
+  color: #ffffff;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
+.footer {
+  height: 36px;
+  background-color: #909399;
   text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+  color: #ffffff;
+  top: 684px;
 }
 </style>
