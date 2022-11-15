@@ -1,87 +1,62 @@
-<script lang="ts" setup >
+<script lang="ts" setup>
+//ライブラリのインポート
+import { CognitoUserPool, CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 
-  //ライブラリのインポート
-  import {
-    CognitoUserPool,
-    CognitoUser,
-    AuthenticationDetails
+// import Header from '../components/Header.vue'
+// import Footer from '../components/Footer.vue'
+import { ref, reactive } from "vue";
 
-  } from 'amazon-cognito-identity-js'
+const code = ref("");
+const password = ref("");
 
-  // import Header from '../components/Header.vue'
-  // import Footer from '../components/Footer.vue'
-  import { ref , reactive } from 'vue'
+const passwordreset = () => {
+  //cognito設定
+  const poolData = {
+    UserPoolId: import.meta.env.VITE_APP_POOL_ID,
+    ClientId: import.meta.env.VITE_APP_CLIENT_ID,
+  };
+  const userPool = new CognitoUserPool(poolData);
 
+  //cognitoパラメータ設定
+  // const useremail = useremail.value;
+  // const password = password.value;
 
-  
-     const useremail =ref('')
-     const password =ref('')
-     
+  const authenticationData = {
+    Username: useremail.value,
+    Password: password.value,
+  };
 
-    
-      const login = () => {
+  const authenticationDetails = new AuthenticationDetails(authenticationData);
 
-        //cognito設定
-        const poolData = {
-          UserPoolId: import.meta.env.VITE_APP_POOL_ID,
-          ClientId: import.meta.env.VITE_APP_CLIENT_ID,
-        };
-        const userPool = new CognitoUserPool(poolData);
+  const userData = {
+    Username: useremail.value,
+    Pool: userPool,
+  };
 
-        //cognitoパラメータ設定
-        // const useremail = useremail.value;
-        // const password = password.value;
+  const cognitoUser = new CognitoUser(userData);
 
-        const authenticationData = {
-          Username: useremail.value,
-          Password: password.value,
-        };
-
-        const authenticationDetails = new AuthenticationDetails(
-          authenticationData
-        );
-
-        const userData = {
-          Username: useremail.value,
-          Pool: userPool,
-        };
-
-        const cognitoUser = new CognitoUser(userData);
-
-        //ログイン処理
-        cognitoUser.authenticateUser(authenticationDetails, {
-
-          newPasswordRequired: function (userAttributes, requiredAttributes) {
-              cognitoUser.completeNewPasswordChallenge("Admin@Admin00", {}, this)
-          },
-
-
-          onSuccess: function() {
-            const result="/mypage_admin";
-            location.assign(result);
-          },
-          onFailure: function(err) {
-            alert(err.message || JSON.stringify(err));
-          }
-        });
-      }
-    
-  
+  cognitoUser.confirmPassword(code.value, password.value, {
+    onSuccess: function () {
+      console.log("password reset success");
+      location.assign("/mypage");
+    },
+    onFailure: function () {
+      console.log("password reset failed");
+    },
+  });
+};
 </script>
 
 <template>
   <div class="login">
     <el-form>
-        <el-input type="password" class="password-form" required v-model="password" placeholder="パスワード" />
-        <el-input type="password" class="password-form" required v-model="password" placeholder="パスワード（再確認）" />
-        <el-input type="number" class="password-form" required v-model="password" placeholder="CODE" />
+      <el-input type="password" id="new_password" class="password-form" required v-model="password" placeholder="パスワード" />
+      <el-input type="password" id="new_password" class="password-form" required v-model="password" placeholder="パスワード（再確認）" />
+      <el-input id="code" class="password-form" required v-model="code" placeholder="CODE" />
 
-
-      <el-button @click.prevent="login" color=#B9A273 class="login-button">更新</el-button>
-      </el-form>
+      <el-button @click.prevent="passwordreset" color="#B9A273" class="login-button">更新</el-button>
+    </el-form>
   </div>
-
-  
 </template>
 
 <style scoped>
@@ -94,9 +69,8 @@
   top: 104px;
 }
 .login-button {
-color: white;
-margin: 20px auto;
-
+  color: white;
+  margin: 20px auto;
 }
 .email-form {
   margin: 20px auto;
