@@ -23,7 +23,7 @@ const signup = () => {
   };
   const userPool = new CognitoUserPool(poolData);
 
-  // const name = { Name: 'name', Value: username.value }
+  const name = { Name: "name", Value: username.value };
   const email = { Name: "email", Value: useremail.value };
   // const Password = { Name: 'password', Value: password.value }
   const Username_kana = { Name: "custom:kana_name", Value: username_kana.value };
@@ -32,7 +32,7 @@ const signup = () => {
   const Birthday = { Name: "birthdate", Value: birthday.value };
 
   const attributeList = [];
-  // attributeList.push(new CognitoUserAttribute(name))
+  attributeList.push(new CognitoUserAttribute(name));
   attributeList.push(new CognitoUserAttribute(email));
   // attributeList.push(new CognitoUserAttribute(Password))
   attributeList.push(new CognitoUserAttribute(Username_kana));
@@ -50,6 +50,8 @@ const signup = () => {
       }
     });
   });
+
+  
 };
 </script>
 

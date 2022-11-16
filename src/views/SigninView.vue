@@ -17,10 +17,6 @@ const login = () => {
   };
   const userPool = new CognitoUserPool(poolData);
 
-  //cognitoパラメータ設定
-  // const useremail = useremail.value;
-  // const password = password.value;
-
   const authenticationData = {
     Username: useremail.value,
     Password: password.value,
@@ -42,7 +38,7 @@ const login = () => {
     // },
 
     onSuccess: function () {
-      const result = "/mypage_admin";
+      const result = "/about";
       location.assign(result);
     },
     onFailure: function (err) {
