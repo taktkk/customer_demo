@@ -5,6 +5,10 @@ import { CognitoUserPool, CognitoUser, AuthenticationDetails } from "amazon-cogn
 // import Header from '../components/Header.vue'
 // import Footer from '../components/Footer.vue'
 import { ref, reactive } from "vue";
+// import { customerInformationStore } from "../stores/information";
+// const information = customerInformationStore();
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const useremail = ref("");
 const password = ref("");
@@ -17,18 +21,16 @@ const passwordsend = () => {
   };
   const userPool = new CognitoUserPool(poolData);
 
-  const authenticationData = {
-    Username: useremail.value,
-    Password: password.value,
-  };
-
-  const authenticationDetails = new AuthenticationDetails(authenticationData);
-
   const userData = {
     Username: useremail.value,
     Pool: userPool,
   };
 
+  // information.$patch({
+  //   email: useremail.value,
+  // });
+
+  // information.email = useremail.value;
   const cognitoUser = new CognitoUser(userData);
 
   return new Promise((resolve, reject) => {
@@ -36,7 +38,8 @@ const passwordsend = () => {
       onSuccess: (result) => {
         console.log("email verification success");
         resolve(result);
-        location.assign("/passwordedit");
+        router.push({ path: "/passwordedit", query: { email: useremail.value } });
+        // location.assign("/passwordedit");
       },
       onFailure: (err) => {
         console.log("email verification failed");

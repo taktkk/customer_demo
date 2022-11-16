@@ -5,7 +5,7 @@ import { CognitoUserPool, CognitoUser, AuthenticationDetails, CognitoUserAttribu
 
 // import Header from '../components/Header.vue'
 // import Footer from '../components/Footer.vue'
-import { ref, reactive } from "vue";
+import { ref, reactive, computed } from "vue";
 
 const useremail = ref("");
 const password = ref("");
@@ -14,6 +14,8 @@ const username_kana = ref("");
 const prefecture = ref("");
 const phonenumber = ref();
 const birthday = ref("");
+
+const tel = computed(() => "+81" + phonenumber.value);
 
 const signup = () => {
   //cognito設定
@@ -28,7 +30,7 @@ const signup = () => {
   // const Password = { Name: 'password', Value: password.value }
   const Username_kana = { Name: "custom:kana_name", Value: username_kana.value };
   const Prefecture = { Name: "address", Value: prefecture.value };
-  const Phonenumber = { Name: "phone_number", Value: phonenumber.value };
+  const Phonenumber = { Name: "phone_number", Value: tel.value };
   const Birthday = { Name: "birthdate", Value: birthday.value };
 
   const attributeList = [];
@@ -50,8 +52,6 @@ const signup = () => {
       }
     });
   });
-
-  
 };
 </script>
 

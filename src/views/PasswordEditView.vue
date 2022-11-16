@@ -5,9 +5,14 @@ import { CognitoUserPool, CognitoUser, AuthenticationDetails } from "amazon-cogn
 // import Header from '../components/Header.vue'
 // import Footer from '../components/Footer.vue'
 import { ref, reactive } from "vue";
+// import { customerInformationStore } from '../stores/information';
+// const information = customerInformationStore();
+import { useRoute } from "vue-router";
+const route = useRoute();
 
 const code = ref("");
 const password = ref("");
+
 
 const passwordreset = () => {
   //cognito設定
@@ -16,20 +21,9 @@ const passwordreset = () => {
     ClientId: import.meta.env.VITE_APP_CLIENT_ID,
   };
   const userPool = new CognitoUserPool(poolData);
-
-  //cognitoパラメータ設定
-  // const useremail = useremail.value;
-  // const password = password.value;
-
-  const authenticationData = {
-    Username: useremail.value,
-    Password: password.value,
-  };
-
-  const authenticationDetails = new AuthenticationDetails(authenticationData);
-
+const useremail = String(route.query.email);
   const userData = {
-    Username: useremail.value,
+    Username: useremail,
     Pool: userPool,
   };
 
@@ -38,6 +32,7 @@ const passwordreset = () => {
   cognitoUser.confirmPassword(code.value, password.value, {
     onSuccess: function () {
       console.log("password reset success");
+      console.log(route.query.email);
       location.assign("/mypage");
     },
     onFailure: function () {

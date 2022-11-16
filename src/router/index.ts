@@ -33,6 +33,11 @@ const router = createRouter({
       path: '/passwordedit',
       name: 'passwordedit',
       component: () => import('../views/PasswordEditView.vue')
+    },
+    {
+      path: '/mypage',
+      name: 'mypage',
+      component: () => import('../views/MypageView.vue')
     }
   ]
 })
