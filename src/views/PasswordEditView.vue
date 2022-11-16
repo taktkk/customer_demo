@@ -13,7 +13,6 @@ const route = useRoute();
 const code = ref("");
 const password = ref("");
 
-
 const passwordreset = () => {
   //cognito設定
   const poolData = {
@@ -21,7 +20,7 @@ const passwordreset = () => {
     ClientId: import.meta.env.VITE_APP_CLIENT_ID,
   };
   const userPool = new CognitoUserPool(poolData);
-const useremail = String(route.query.email);
+  const useremail = String(route.query.email);
   const userData = {
     Username: useremail,
     Pool: userPool,
@@ -33,7 +32,7 @@ const useremail = String(route.query.email);
     onSuccess: function () {
       console.log("password reset success");
       console.log(route.query.email);
-      location.assign("/mypage");
+      location.assign("/signin");
     },
     onFailure: function () {
       console.log("password reset failed");

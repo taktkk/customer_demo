@@ -38,7 +38,7 @@ const login = () => {
     // },
 
     onSuccess: function () {
-      const result = "/about";
+      const result = "/mypage";
       location.assign(result);
     },
     onFailure: function (err) {

@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
 import { ArrowDown } from "@element-plus/icons-vue";
+import { CognitoUserPool, CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
+
+const logout = () => {
+  const poolData = {
+    UserPoolId: import.meta.env.VITE_APP_POOL_ID,
+    ClientId: import.meta.env.VITE_APP_CLIENT_ID,
+  };
+  const userPool = new CognitoUserPool(poolData);
+  userPool.getCurrentUser().signOut();
+  console.log("ログアウト成功");
+};
 </script>
 
 <template>
@@ -18,32 +29,13 @@ import { ArrowDown } from "@element-plus/icons-vue";
             </span>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item
-                  ><RouterLink to="/">Home</RouterLink></el-dropdown-item
-                >
-                <el-dropdown-item
-                  ><RouterLink to="/about">About</RouterLink></el-dropdown-item
-                >
-                <el-dropdown-item
-                  ><RouterLink to="/signin"
-                    >SignIn</RouterLink
-                  ></el-dropdown-item
-                >
-                <el-dropdown-item
-                  ><RouterLink to="/signup"
-                    >Signup</RouterLink
-                  ></el-dropdown-item
-                >
-                <el-dropdown-item
-                  ><RouterLink to="/passwordreset"
-                    >Password Reset</RouterLink
-                  ></el-dropdown-item
-                >
-                <el-dropdown-item
-                  ><RouterLink to="/passwordedit"
-                    >Password Edit</RouterLink
-                  ></el-dropdown-item
-                >
+                <el-dropdown-item><RouterLink to="/">Home</RouterLink></el-dropdown-item>
+                <el-dropdown-item><RouterLink to="/about">About</RouterLink></el-dropdown-item>
+                <el-dropdown-item><RouterLink to="/signin">SignIn</RouterLink></el-dropdown-item>
+                <el-dropdown-item><RouterLink to="/signup">Signup</RouterLink></el-dropdown-item>
+                <el-dropdown-item><RouterLink to="/passwordreset">Password Reset</RouterLink></el-dropdown-item>
+                <el-dropdown-item><RouterLink to="/passwordedit">Password Edit</RouterLink></el-dropdown-item>
+                <el-dropdown-item><RouterLink to="/signin" @click.native.prevent="logout">Log Out</RouterLink></el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
@@ -54,9 +46,7 @@ import { ArrowDown } from "@element-plus/icons-vue";
 
   <div class="common-layout">
     <el-container>
-      <el-footer class="footer"
-        >Copyright © 2022Varma Inc. All Rights Reserved.</el-footer
-      >
+      <el-footer class="footer">Copyright © 2022Varma Inc. All Rights Reserved.</el-footer>
     </el-container>
   </div>
 
