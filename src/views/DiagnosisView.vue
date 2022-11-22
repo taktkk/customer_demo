@@ -18,7 +18,7 @@ const input = ref("");
   <div class="form">
     <el-row>
       <el-col :span="4">
-        <el-button class="button" color="#B9A273" round="true">+</el-button>
+        <el-button class="button-round" color="#B9A273" >+</el-button>
       </el-col>
       <el-col :span="12">
         <el-input v-model="input" placeholder="入力してください" />
@@ -63,6 +63,13 @@ ul {
 .button {
   color: white;
   margin-left: 20px;
+}
+.button-round {
+  color: white;
+  margin-left: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 
 .form {
