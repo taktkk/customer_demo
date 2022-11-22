@@ -36,7 +36,11 @@ const logout = () => {
                 <el-dropdown-item><RouterLink to="/passwordreset">Password Reset</RouterLink></el-dropdown-item>
                 <el-dropdown-item><RouterLink to="/passwordedit">Password Edit</RouterLink></el-dropdown-item>
                 <el-dropdown-item><RouterLink to="/signin" @click.native.prevent="logout">Log Out</RouterLink></el-dropdown-item>
+                <el-dropdown-item><RouterLink to="/contact">お問合せ先</RouterLink></el-dropdown-item>
+                <el-dropdown-item><RouterLink to="/diagnosis">診断</RouterLink></el-dropdown-item>
+
               </el-dropdown-menu>
+
             </template>
           </el-dropdown>
         </div>
