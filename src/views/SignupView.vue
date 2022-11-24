@@ -129,14 +129,14 @@ const signup = () => {
     <p>5. 今お使いのシャンプーやトリートメントを気に入っていますか</p>
     <div class="flex">
       <el-radio-group v-model="radio3">
-        <el-radio label="1" size="large">はい</el-radio>
+        <el-radio label="1" size="large" >はい</el-radio>
         <el-radio label="2" size="large">いいえ</el-radio>
       </el-radio-group>
     </div>
     <p>6. 今回オンラインカウンセリングを受けてみようと思った理由をお教えください</p>
     <el-row>
       <el-col :span="12">
-        <el-input v-model="input1" placeholder="入力してください" />
+        <el-input v-model="input1" placeholder="入力してください"/>
       </el-col>
     </el-row>
     <p>7. オンラインカウンセリングで期待する事をお教えください</p>
