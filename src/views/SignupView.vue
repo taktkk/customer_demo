@@ -154,11 +154,8 @@ const signup = () => {
 <style scoped>
 .signup {
   margin: 0 auto;
-  position: absolute;
-  /* width: 812px; */
-  height: 40px;
-  left: 500px;
-  top: 104px;
+  width: 812px;
+  height: 756px;
 }
 .login-button {
   color: white;
