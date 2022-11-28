@@ -51,29 +51,51 @@ const passwordsend = () => {
 </script>
 
 <template>
-  <div class="login">
-    <h3>再設定したいメールアドレスを入力してください。</h3>
-    <el-form>
-      <el-input type="email" class="email-form" required v-model="useremail" placeholder="メールアドレス" />
-      <el-button @click.prevent="passwordsend" color="#B9A273" class="login-button">パスワード再設定用メール送信</el-button>
-    </el-form>
+  <div class="container">
+    <div class="login">
+      <p class="text">再設定したいメールアドレスを入力してください。</p>
+      <el-form>
+        <el-input type="email" class="email-form" required v-model="useremail" placeholder="メールアドレス" />
+        <el-button @click.prevent="passwordsend" color="#B9A273" class="login-button">パスワード再設定用メール送信</el-button>
+      </el-form>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.container {
+  width: 100%;
+}
 .login {
+  margin: 20px auto;
   text-align: center;
-  position: absolute;
   width: 400px;
-  height: 40px;
-  left: 500px;
-  top: 104px;
 }
 .login-button {
   color: white;
   margin: 20px auto;
 }
 .email-form {
+  width: 280px;
   margin: 20px auto;
+}
+
+.text {
+  height: 24px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  /* identical to box height, or 171% */
+
+  letter-spacing: 0.16px;
+
+  /* Info/Info-100% */
+
+  color: #909399;
+  background: #f4f4f5;
+  border-radius: 2px;
 }
 </style>

@@ -91,6 +91,6 @@ const logout = () => {
   background-color: #909399;
   text-align: center;
   color: #ffffff;
-  top: 684px;
+  top: calc(100vh - 108px);
 }
 </style>

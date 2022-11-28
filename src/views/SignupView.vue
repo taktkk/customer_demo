@@ -63,95 +63,104 @@ const signup = () => {
 </script>
 
 <template>
-  <div class="signup">
-    <h3>ユーザー情報</h3>
-    <el-row>
-      <el-col :span="9">
-        <el-input type="email" class="email-form w-50 m-2" required v-model="useremail" placeholder="メールアドレス" />
-      </el-col>
-      <el-col :span="9">
-        <el-input type="password" class="email-form w-50 m-2" required v-model="password" placeholder="パスワード" />
-      </el-col>
-    </el-row>
-    <el-row>
-      <div class="demo-input-size">
-        <el-input type="string" class="email-form w-50 m-2" required v-model="username" placeholder="氏名" />
-        <el-input type="string" class="email-form w-50 m-2" required v-model="username_kana" placeholder="氏名（カタカナ）" />
-      </div>
-    </el-row>
-    <el-row>
-      <div class="demo-input-size">
-        <el-input type="string" class="email-form w-50 m-2" required v-model="prefecture" placeholder="都道府県" />
-        <el-input type="string" class="email-form w-60 m-2" required v-model="phonenumber" placeholder="電話番号" />
-      </div>
-    </el-row>
-    <el-row>
-      <div class="demo-input-size">
-        <el-input type="string" class="email-form w-50 m-2" required v-model="birthday" placeholder="生年月日" />
-      </div>
-    </el-row>
+  <div class="container">
+    <div class="signup">
+      <h3>ユーザー情報</h3>
+      <el-row>
+        <el-col :span="9">
+          <el-input type="email" class="email-form w-50 m-2" required v-model="useremail" placeholder="メールアドレス" />
+        </el-col>
+        <el-col :span="9" style="margin: 0 80px">
+          <el-input type="password" class="email-form w-50 m-2" required v-model="password" placeholder="パスワード" />
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="9">
+          <el-input type="string" class="email-form w-50 m-2" required v-model="username" placeholder="氏名" />
+        </el-col>
+        <el-col :span="9" style="margin: 0 80px">
+          <el-input type="string" class="email-form w-50 m-2" required v-model="username_kana" placeholder="氏名（カタカナ）" />
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="9">
+          <el-input type="string" class="email-form w-50 m-2" required v-model="prefecture" placeholder="都道府県" />
+        </el-col>
+        <el-col :span="9" style="margin: 0 80px">
+          <el-input type="string" class="email-form w-60 m-2" required v-model="phonenumber" placeholder="電話番号" />
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="9">
+          <el-input type="string" class="email-form w-50 m-2" required v-model="birthday" placeholder="生年月日" />
+        </el-col>
+      </el-row>
 
-    <el-row>
-      <p>質問事項</p>
-      <p>1. 髪や頭皮のお悩みに当てはまるモノにチェックをお願いします</p>
+      <el-row>
+        <p>質問事項</p>
+        <p>1. 髪や頭皮のお悩みに当てはまるモノにチェックをお願いします</p>
+        <el-checkbox-group v-model="checkList">
+          <el-checkbox label="くせ毛" />
+          <el-checkbox label="うねり" />
+          <el-checkbox label="白髪" />
+          <el-checkbox label="かゆみ" />
+          <el-checkbox label="フケ" />
+          <el-checkbox label="ハリコシ" />
+        </el-checkbox-group>
+      </el-row>
+      <div>2. お風呂上がりにドライヤーで髪や頭皮を乾かしていますか。</div>
+
+      <div class="flex">
+        <el-radio-group v-model="radio1">
+          <el-radio label="1" size="large">はい</el-radio>
+          <el-radio label="2" size="large">いいえ</el-radio>
+        </el-radio-group>
+      </div>
+
+      <p>3. 現在薬剤使用の美容メニューをしていますか</p>
+      <div class="flex">
+        <el-radio-group v-model="radio2">
+          <el-radio label="1" size="large">はい</el-radio>
+          <el-radio label="2" size="large">いいえ</el-radio>
+        </el-radio-group>
+      </div>
+      <p>4. 「３」ではいの方のみお答えください</p>
       <el-checkbox-group v-model="checkList">
-        <el-checkbox label="くせ毛" />
-        <el-checkbox label="うねり" />
-        <el-checkbox label="白髪" />
-        <el-checkbox label="かゆみ" />
-        <el-checkbox label="フケ" />
-        <el-checkbox label="ハリコシ" />
+        <el-checkbox label="カラー" />
+        <el-checkbox label="パーマ" />
+        <el-checkbox label="ストレート" />
+        <el-checkbox label="その他" />
       </el-checkbox-group>
-    </el-row>
-    <div>2. お風呂上がりにドライヤーで髪や頭皮を乾かしていますか。</div>
-
-    <div class="flex">
-      <el-radio-group v-model="radio1">
-        <el-radio label="1" size="large">はい</el-radio>
-        <el-radio label="2" size="large">いいえ</el-radio>
-      </el-radio-group>
+      <p>5. 今お使いのシャンプーやトリートメントを気に入っていますか</p>
+      <div class="flex">
+        <el-radio-group v-model="radio3">
+          <el-radio label="1" size="large">はい</el-radio>
+          <el-radio label="2" size="large">いいえ</el-radio>
+        </el-radio-group>
+      </div>
+      <p>6. 今回オンラインカウンセリングを受けてみようと思った理由をお教えください</p>
+      <el-row>
+        <el-col :span="12">
+          <el-input v-model="input1" placeholder="入力してください" />
+        </el-col>
+      </el-row>
+      <p>7. オンラインカウンセリングで期待する事をお教えください</p>
+      <el-row>
+        <el-col :span="12">
+          <el-input v-model="input2" placeholder="入力してください" />
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-button @click.prevent="signup" color="#B9A273" class="login-button">新規登録</el-button>
+      </el-row>
     </div>
-
-    <p>3. 現在薬剤使用の美容メニューをしていますか</p>
-    <div class="flex">
-      <el-radio-group v-model="radio2">
-        <el-radio label="1" size="large">はい</el-radio>
-        <el-radio label="2" size="large">いいえ</el-radio>
-      </el-radio-group>
-    </div>
-    <p>4. 「３」ではいの方のみお答えください</p>
-    <el-checkbox-group v-model="checkList">
-      <el-checkbox label="カラー" />
-      <el-checkbox label="パーマ" />
-      <el-checkbox label="ストレート" />
-      <el-checkbox label="その他" />
-    </el-checkbox-group>
-    <p>5. 今お使いのシャンプーやトリートメントを気に入っていますか</p>
-    <div class="flex">
-      <el-radio-group v-model="radio3">
-        <el-radio label="1" size="large" >はい</el-radio>
-        <el-radio label="2" size="large">いいえ</el-radio>
-      </el-radio-group>
-    </div>
-    <p>6. 今回オンラインカウンセリングを受けてみようと思った理由をお教えください</p>
-    <el-row>
-      <el-col :span="12">
-        <el-input v-model="input1" placeholder="入力してください"/>
-      </el-col>
-    </el-row>
-    <p>7. オンラインカウンセリングで期待する事をお教えください</p>
-    <el-row>
-      <el-col :span="12">
-        <el-input v-model="input2" placeholder="入力してください" />
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-button @click.prevent="signup" color="#B9A273" class="login-button">新規登録</el-button>
-    </el-row>
   </div>
 </template>
 
 <style scoped>
+.container {
+  width: 100%;
+}
 .signup {
   margin: 0 auto;
   width: 812px;
@@ -159,7 +168,7 @@ const signup = () => {
 }
 .login-button {
   color: white;
-  margin: 20px 150px;
+  margin: 20px auto;
 }
 .email-form {
   margin: 10px 20px 10px 0;

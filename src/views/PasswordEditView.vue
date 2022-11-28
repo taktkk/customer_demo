@@ -42,25 +42,27 @@ const passwordreset = () => {
 </script>
 
 <template>
-  <div class="login">
-    <el-form>
-      <el-input type="password" id="new_password" class="password-form" required v-model="password" placeholder="パスワード" />
-      <el-input type="password" id="new_password" class="password-form" required v-model="password" placeholder="パスワード（再確認）" />
-      <el-input id="code" class="password-form" required v-model="code" placeholder="CODE" />
+  <div class="container">
+    <div class="login">
+      <el-form>
+        <el-input type="password" id="new_password" class="password-form" required v-model="password" placeholder="パスワード" />
+        <el-input type="password" id="new_password" class="password-form" required v-model="password" placeholder="パスワード（再確認）" />
+        <el-input id="code" class="password-form" required v-model="code" placeholder="CODE" />
 
-      <el-button @click.prevent="passwordreset" color="#B9A273" class="login-button">更新</el-button>
-    </el-form>
+        <el-button @click.prevent="passwordreset" color="#B9A273" class="login-button">更新</el-button>
+      </el-form>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.container {
+  width: 100%;
+}
 .login {
+  margin: 20px auto;
   text-align: center;
-  position: absolute;
   width: 280px;
-  height: 40px;
-  left: 500px;
-  top: 104px;
 }
 .login-button {
   color: white;

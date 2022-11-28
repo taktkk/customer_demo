@@ -49,24 +49,26 @@ const login = () => {
 </script>
 
 <template>
-  <div class="login">
-    <h3>顧客ログイン</h3>
-    <el-form>
-      <el-input type="email" class="email-form" required v-model="useremail" placeholder="メールアドレス" />
-      <el-input type="password" class="password-form" required v-model="password" placeholder="パスワード" />
-      <el-button @click.prevent="login" color="#B9A273" class="login-button">ログイン</el-button>
-    </el-form>
+  <div class="container">
+    <div class="login">
+      <h3>顧客ログイン</h3>
+      <el-form>
+        <el-input type="email" class="email-form" required v-model="useremail" placeholder="メールアドレス" />
+        <el-input type="password" class="password-form" required v-model="password" placeholder="パスワード" />
+        <el-button @click.prevent="login" color="#B9A273" class="login-button">ログイン</el-button>
+      </el-form>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.container {
+  width: 100%;
+}
 .login {
+  margin: 20px auto;
   text-align: center;
-  position: absolute;
   width: 280px;
-  height: 40px;
-  left: 500px;
-  top: 104px;
 }
 .login-button {
   color: white;
