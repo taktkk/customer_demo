@@ -65,40 +65,47 @@ const signup = () => {
 <template>
   <div class="container">
     <div class="signup">
-      <h3>ユーザー情報</h3>
+      <h3 class="user_info">ユーザー情報</h3>
       <el-row>
         <el-col :span="9">
+          <p class="form_text">メールアドレス</p>
           <el-input type="email" class="email-form w-50 m-2" required v-model="useremail" placeholder="メールアドレス" />
         </el-col>
         <el-col :span="9" style="margin: 0 80px">
+          <p class="form_text">パスワード</p>
           <el-input type="password" class="email-form w-50 m-2" required v-model="password" placeholder="パスワード" />
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="9">
+          <p class="form_text">氏名</p>
           <el-input type="string" class="email-form w-50 m-2" required v-model="username" placeholder="氏名" />
         </el-col>
         <el-col :span="9" style="margin: 0 80px">
+          <p class="form_text">氏名（カタカナ</p>
           <el-input type="string" class="email-form w-50 m-2" required v-model="username_kana" placeholder="氏名（カタカナ）" />
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="9">
+          <p class="form_text">都道府県</p>
           <el-input type="string" class="email-form w-50 m-2" required v-model="prefecture" placeholder="都道府県" />
         </el-col>
         <el-col :span="9" style="margin: 0 80px">
+          <p class="form_text">電話番号</p>
           <el-input type="string" class="email-form w-60 m-2" required v-model="phonenumber" placeholder="電話番号" />
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="9">
+          <p class="form_text">生年月日</p>
           <el-input type="string" class="email-form w-50 m-2" required v-model="birthday" placeholder="生年月日" />
         </el-col>
       </el-row>
 
       <el-row>
         <p>質問事項</p>
-        <p>1. 髪や頭皮のお悩みに当てはまるモノにチェックをお願いします</p>
+        <p class="form_text">1. 髪や頭皮のお悩みに当てはまるモノにチェックをお願いします</p>
         <el-checkbox-group v-model="checkList">
           <el-checkbox label="くせ毛" />
           <el-checkbox label="うねり" />
@@ -108,7 +115,7 @@ const signup = () => {
           <el-checkbox label="ハリコシ" />
         </el-checkbox-group>
       </el-row>
-      <div>2. お風呂上がりにドライヤーで髪や頭皮を乾かしていますか。</div>
+      <div class="form_text">2. お風呂上がりにドライヤーで髪や頭皮を乾かしていますか。</div>
 
       <div class="flex">
         <el-radio-group v-model="radio1">
@@ -117,21 +124,21 @@ const signup = () => {
         </el-radio-group>
       </div>
 
-      <p>3. 現在薬剤使用の美容メニューをしていますか</p>
+      <p class="form_text">3. 現在薬剤使用の美容メニューをしていますか</p>
       <div class="flex">
         <el-radio-group v-model="radio2">
           <el-radio label="1" size="large">はい</el-radio>
           <el-radio label="2" size="large">いいえ</el-radio>
         </el-radio-group>
       </div>
-      <p>4. 「３」ではいの方のみお答えください</p>
+      <p class="form_text">4. 「３」ではいの方のみお答えください</p>
       <el-checkbox-group v-model="checkList">
         <el-checkbox label="カラー" />
         <el-checkbox label="パーマ" />
         <el-checkbox label="ストレート" />
         <el-checkbox label="その他" />
       </el-checkbox-group>
-      <p>5. 今お使いのシャンプーやトリートメントを気に入っていますか</p>
+      <p class="form_text">5. 今お使いのシャンプーやトリートメントを気に入っていますか</p>
       <div class="flex">
         <el-radio-group v-model="radio3">
           <el-radio label="1" size="large">はい</el-radio>
@@ -158,6 +165,25 @@ const signup = () => {
 </template>
 
 <style scoped>
+.form_text {
+  margin-top: 4px;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #000000;
+}
+.user_info {
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 22px;
+  color: #000000;
+
+}
 .container {
   width: 100%;
 }
@@ -171,7 +197,7 @@ const signup = () => {
   margin: 20px auto;
 }
 .email-form {
-  margin: 10px 20px 10px 0;
+  margin: 0 20px 10px 0;
 }
 
 .demo-input-size {
